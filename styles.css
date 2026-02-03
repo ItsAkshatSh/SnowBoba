@@ -1,0 +1,620 @@
+:root {
+    --snow: #fafbfc;
+    --ice: #e8eef3;
+    --frost: #d4dce5;
+    --winter-gray: #8b95a1;
+    --deep-winter: #2d3640;
+    --night: #1a1f26;
+    --accent: #5b8fb9;
+    --accent-light: #7ba8ca;
+    --glow: rgba(91, 143, 185, 0.15);
+  }
+  
+  body[data-theme="fireside"] {
+    --accent: #d4826f;
+    --accent-light: #e09a88;
+    --glow: rgba(212, 130, 111, 0.15);
+  }
+  
+  body[data-theme="aurora"] {
+    --accent: #6bb090;
+    --accent-light: #85c4a6;
+    --glow: rgba(107, 176, 144, 0.15);
+  }
+  
+  body[data-theme="starfield"] {
+    --accent: #8c7fb8;
+    --accent-light: #a497ca;
+    --glow: rgba(140, 127, 184, 0.15);
+  }
+  
+  body[data-theme="glacier"] {
+    --accent: #68b5c4;
+    --accent-light: #82c6d3;
+    --glow: rgba(104, 181, 196, 0.15);
+  }
+  
+  * {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+  }
+  
+  html,
+  body {
+    height: 100%;
+  }
+  
+ body {
+    margin: 0;
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    color: #eef3ff;
+    background:
+      radial-gradient(1100px 800px at 70% 5%, rgba(34, 54, 96, 0.55), transparent 65%),
+      radial-gradient(900px 650px at 10% 40%, rgba(25, 72, 92, 0.5), transparent 70%),
+      linear-gradient(180deg, #050613 0%, #040816 55%, #02040b 100%);
+    line-height: 1.6;
+    overflow-x: hidden;
+  }
+  
+  .sky {
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: 0;
+    overflow: hidden;
+  }
+  
+  .vignette {
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(
+      ellipse at center,
+      transparent 0%,
+      rgba(26, 31, 38, 0.03) 100%
+    );
+  }
+  
+  .sky::before {
+    content: '';
+    position: absolute;
+    top: 12%;
+    right: 15%;
+    width: 120px;
+    height: 120px;
+    background: 
+      linear-gradient(to right, transparent 0%, transparent 20%, #f4f1e8 20%, #f4f1e8 80%, transparent 80%),
+      linear-gradient(to bottom, transparent 0%, transparent 20%, #f4f1e8 20%, #f4f1e8 80%, transparent 80%);
+    background-size: 100% 100%;
+    background-position: center;
+    box-shadow: 
+      inset 0 0 0 20px #e8e5d8,
+      inset 0 0 0 24px #f4f1e8,
+      inset 16px 20px 0 0 rgba(220, 218, 210, 0.4),
+      inset -12px -16px 0 0 rgba(180, 178, 170, 0.3),
+      0 0 60px rgba(244, 241, 232, 0.4),
+      0 0 120px rgba(244, 241, 232, 0.2);
+    border-radius: 50%;
+    opacity: 0.85;
+    image-rendering: pixelated;
+    filter: contrast(1.1);
+  }
+  
+  .sky::after {
+    content: '';
+    position: absolute;
+    top: calc(12% + 30px);
+    right: calc(15% + 45px);
+    width: 18px;
+    height: 18px;
+    background: rgba(200, 198, 190, 0.5);
+    border-radius: 50%;
+    box-shadow:
+      -25px 10px 0 -4px rgba(200, 198, 190, 0.4),
+      15px -15px 0 -6px rgba(200, 198, 190, 0.35),
+      -10px -20px 0 -8px rgba(200, 198, 190, 0.3);
+    image-rendering: pixelated;
+  }
+  
+  .stars {
+    position: absolute;
+    inset: 0;
+    opacity: 0.4;
+    background-image: radial-gradient(
+        1px 1px at 20% 30%,
+        var(--winter-gray),
+        transparent
+      ),
+      radial-gradient(1px 1px at 60% 70%, var(--winter-gray), transparent),
+      radial-gradient(1px 1px at 50% 50%, var(--winter-gray), transparent),
+      radial-gradient(1px 1px at 80% 10%, var(--winter-gray), transparent),
+      radial-gradient(1px 1px at 90% 60%, var(--winter-gray), transparent),
+      radial-gradient(1px 1px at 33% 80%, var(--winter-gray), transparent),
+      radial-gradient(1px 1px at 15% 15%, var(--winter-gray), transparent);
+    background-size: 200px 200px;
+    background-repeat: repeat;
+  }
+  
+  .aurora {
+    position: absolute;
+    inset: -20%;
+    opacity: 0.6;
+    background: radial-gradient(
+      ellipse 800px 600px at 50% 20%,
+      var(--glow),
+      transparent 70%
+    );
+    filter: blur(60px);
+    animation: aurora 20s ease-in-out infinite;
+  }
+  
+  @keyframes aurora {
+    0%,
+    100% {
+      transform: translate(0, 0) scale(1);
+    }
+    50% {
+      transform: translate(30px, 20px) scale(1.1);
+    }
+  }
+  
+  .snow {
+    position: absolute;
+    inset: 0;
+    opacity: 0.5;
+    background-image: radial-gradient(
+        2px 2px at 25% 25%,
+        rgba(255, 255, 255, 0.8),
+        transparent
+      ),
+      radial-gradient(2px 2px at 75% 75%, rgba(255, 255, 255, 0.6), transparent),
+      radial-gradient(1px 1px at 50% 50%, rgba(255, 255, 255, 0.7), transparent);
+    background-size: 250px 250px, 300px 300px, 200px 200px;
+    animation: snowfall 15s linear infinite;
+  }
+  
+  @keyframes snowfall {
+    from {
+      background-position: 0 0, 0 0, 0 0;
+    }
+    to {
+      background-position: 0 250px, 0 300px, 0 200px;
+    }
+  }
+  
+  .wrap {
+    position: relative;
+    z-index: 1;
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 40px 24px;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .top {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 24px;
+    margin-bottom: 32px;
+    flex-wrap: wrap;
+  }
+  
+  .badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+  padding: 8px 16px;
+  background: rgba(15, 20, 35, 0.6);
+  border: 1px solid rgba(255, 255, 255, 0.24);
+    border-radius: 100px;
+    font-size: 0.875rem;
+    font-weight: 500;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+  backdrop-filter: blur(16px);
+  }
+  
+  .dot {
+    width: 8px;
+    height: 8px;
+    background: var(--accent);
+    border-radius: 50%;
+    animation: pulse 2s ease-in-out infinite;
+  }
+  
+  @keyframes pulse {
+    0%,
+    100% {
+      opacity: 1;
+    }
+    50% {
+      opacity: 0.5;
+    }
+  }
+  
+  .topRight {
+    display: flex;
+    align-items: flex-start;
+    gap: 16px;
+    flex-wrap: wrap;
+  }
+
+  .themeControl {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    align-items: center;
+  }
+  
+  .themeControl label {
+    font-size: 0.75rem;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: rgba(220, 230, 255, 0.7);
+  }
+  
+  .themeControl select {
+    padding: 8px 12px;
+    border: 1px solid rgba(255, 255, 255, 0.18);
+    border-radius: 8px;
+    background: rgba(8, 12, 26, 0.65);
+    font: inherit;
+    font-size: 0.875rem;
+    color: #f4f6ff;
+    cursor: pointer;
+    backdrop-filter: blur(18px);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+    transition: all 0.2s ease;
+  }
+  
+  .themeControl select:hover {
+    border-color: rgba(255, 255, 255, 0.28);
+    background: rgba(8, 12, 26, 0.75);
+  }
+  
+  .themeControl select:focus {
+    outline: 2px solid var(--accent);
+    outline-offset: 2px;
+    border-color: var(--accent);
+  }
+  
+  .themeControl select option {
+    background: #0f1420;
+    color: #f4f6ff;
+    padding: 8px;
+  }
+  
+  .statsRow {
+    display: flex;
+    gap: 12px;
+  }
+  
+  .statBox {
+  padding: 8px 12px;
+  background: rgba(8, 12, 26, 0.65);
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  border-radius: 10px;
+  min-width: 70px;
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(18px);
+  }
+  
+  .statLabel {
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: rgba(220, 230, 255, 0.7);
+    margin-bottom: 2px;
+  }
+  
+  .statValue {
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: #f8fbff;
+  }
+  
+  .focusShell {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 60px;
+    padding: 40px 0;
+  }
+  
+  .focusCenter {
+    display: flex;
+    justify-content: center;
+  }
+  
+  .focusCard {
+  max-width: 320px;
+  padding: 32px;
+  background: radial-gradient(circle at 0 0, rgba(255, 255, 255, 0.18), transparent 55%),
+    rgba(8, 12, 26, 0.7);
+  border: 1px solid rgba(255, 255, 255, 0.22);
+  border-radius: 18px;
+  text-align: center;
+  box-shadow: 0 26px 70px rgba(0, 0, 0, 0.65);
+  backdrop-filter: blur(22px);
+  }
+  
+  .focusEmoji {
+    font-size: 3rem;
+    margin-bottom: 16px;
+    line-height: 1;
+  }
+  
+  .focusTitle {
+    font-size: 1.125rem;
+    font-weight: 600;
+    color: #f8fbff;
+    margin-bottom: 8px;
+  }
+  
+  .focusSubtitle {
+    font-size: 0.875rem;
+    color: rgba(225, 235, 255, 0.8);
+    margin-bottom: 20px;
+  }
+  
+  .focusSoundButton {
+    width: 100%;
+    padding: 12px 24px;
+  background: linear-gradient(
+    135deg,
+    rgba(255, 255, 255, 0.12),
+    var(--accent)
+  );
+    color: white;
+    border: none;
+  border-radius: 999px;
+    font: inherit;
+    font-weight: 500;
+    cursor: pointer;
+    transition: background 0.2s ease;
+  }
+  
+  .focusSoundButton:hover {
+    background: var(--accent-light);
+  }
+  
+  .focusSoundButton:active {
+    transform: scale(0.98);
+  }
+  
+  .focusBottom {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 24px;
+  }
+  
+  .bottomTimer {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+  }
+  
+  .timerDisplay {
+    font-size: 4rem;
+    font-weight: 300;
+    font-variant-numeric: tabular-nums;
+    color: #f9fbff;
+    letter-spacing: -0.02em;
+    display: flex;
+    gap: 4px;
+  }
+  
+  .bottomModes {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+    width: 100%;
+  }
+  
+  .timerModes {
+    display: flex;
+    gap: 8px;
+    padding: 4px;
+  background: rgba(8, 12, 26, 0.6);
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  border-radius: 999px;
+  box-shadow: 0 18px 50px rgba(0, 0, 0, 0.55);
+  backdrop-filter: blur(18px);
+  }
+  
+  .timerModes button {
+    padding: 8px 20px;
+    background: transparent;
+    border: none;
+    border-radius: 8px;
+    font: inherit;
+    font-size: 0.875rem;
+    color: rgba(220, 230, 255, 0.7);
+    cursor: pointer;
+    transition: all 0.2s ease;
+    font-weight: 500;
+  }
+  
+  .timerModes button:hover {
+    color: #f4f6ff;
+  }
+  
+  .timerModes button.is-active {
+    background: var(--accent);
+    color: white;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+  }
+  
+  .timerModeLabel {
+    font-size: 0.875rem;
+    color: rgba(220, 230, 255, 0.7);
+  }
+  
+  .bottomActions {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+  }
+  
+  .timerActions {
+    display: flex;
+    gap: 12px;
+  }
+  
+  .timerActions button {
+    padding: 12px 32px;
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  border-radius: 999px;
+  background: rgba(8, 12, 26, 0.65);
+    font: inherit;
+    font-weight: 500;
+  color: #f4f6ff;
+    cursor: pointer;
+    transition: all 0.2s ease;
+  box-shadow: 0 18px 50px rgba(0, 0, 0, 0.55);
+  backdrop-filter: blur(18px);
+  }
+  
+  .timerActions button:hover:not(:disabled) {
+    border-color: var(--accent);
+    color: var(--accent);
+  }
+  
+  .timerActions button:disabled {
+    opacity: 0.4;
+    cursor: not-allowed;
+  }
+  
+  #timerStart {
+  background: linear-gradient(
+    135deg,
+    rgba(255, 255, 255, 0.16),
+    var(--accent)
+  );
+  color: #0b0c12;
+  border-color: rgba(255, 255, 255, 0.3);
+  }
+  
+  #timerStart:hover:not(:disabled) {
+    background: var(--accent-light);
+    border-color: var(--accent-light);
+    color: white;
+  }
+  
+  body.timer-finished .timerDisplay {
+    animation: flash 1s ease-out;
+  }
+  
+  @keyframes flash {
+    0% {
+      color: #f9fbff;
+    }
+    50% {
+      color: var(--accent);
+    }
+    100% {
+      color: #f9fbff;
+    }
+  }
+  
+  .foot {
+    margin-top: 40px;
+    padding-top: 24px;
+    border-top: 1px solid rgba(255, 255, 255, 0.12);
+    text-align: center;
+    font-size: 0.875rem;
+    color: rgba(220, 230, 255, 0.6);
+  }
+  
+  audio {
+    display: none;
+  }
+  
+  a:focus-visible,
+  button:focus-visible,
+  select:focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 2px;
+  }
+  
+  @media (max-width: 768px) {
+    .top {
+      flex-direction: column;
+      align-items: stretch;
+    }
+  
+    .topRight {
+      flex-direction: column;
+    }
+  
+    .statsRow {
+      width: 100%;
+    }
+  
+    .statBox {
+      flex: 1;
+    }
+  
+    .timerDisplay {
+      font-size: 3rem;
+    }
+  
+    .timerActions {
+      flex-wrap: wrap;
+      width: 100%;
+    }
+  
+    .timerActions button {
+      flex: 1;
+      min-width: 100px;
+    }
+  
+    .focusCard {
+      padding: 24px;
+    }
+    
+    .sky::before {
+      width: 80px;
+      height: 80px;
+      top: 8%;
+      right: 8%;
+    }
+    
+    .sky::after {
+      top: calc(8% + 20px);
+      right: calc(8% + 30px);
+      width: 12px;
+      height: 12px;
+    }
+  }
+  
+  @media (max-width: 480px) {
+    .timerDisplay {
+      font-size: 2.5rem;
+    }
+  
+    .focusEmoji {
+      font-size: 2.5rem;
+    }
+  
+    .timerActions button {
+      padding: 10px 20px;
+      font-size: 0.875rem;
+    }
+  }
+  
+  @media (prefers-reduced-motion: reduce) {
+    .aurora,
+    .snow,
+    .dot,
+    * {
+      animation: none !important;
+      transition: none !important;
+    }
+  }
