@@ -3,11 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Winter Solstice — The Long Night, the Returning Light</title>
-    <meta
-      name="description"
-      content="A cozy, mysterious winter-solstice scene: stars, aurora, snowfall, and a small light returning after the longest night."
-    />
+    <title>Winter Focus</title>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
@@ -22,6 +18,14 @@
       <div class="stars"></div>
       <div class="snow"></div>
       <div class="vignette"></div>
+      <div class="snow-pile"></div>
+      <div class="snow-truck">
+        <div class="truck-body"></div>
+        <div class="truck-cabin"></div>
+        <div class="truck-plow"></div>
+        <div class="truck-wheel truck-wheel-front"></div>
+        <div class="truck-wheel truck-wheel-back"></div>
+      </div>
     </div>
 
     <main class="wrap">
@@ -31,16 +35,6 @@
           Winter Focus
         </div>
         <div class="topRight">
-          <div class="themeControl themeControl--header">
-            <label for="themeSelect">Theme</label>
-            <select id="themeSelect">
-              <option value="night" selected>Solstice Night</option>
-              <option value="fireside">Fireside Study</option>
-              <option value="aurora">Aurora Focus</option>
-              <option value="starfield">Starfield Silence</option>
-              <option value="glacier">Glacier Dawn</option>
-            </select>
-          </div>
           <div class="statsRow" aria-label="Focus statistics">
             <div class="statBox">
               <p class="statLabel">Focus streak</p>
@@ -59,18 +53,6 @@
       </header>
 
       <section class="focusShell" aria-label="Winter focus scene">
-        <div class="focusCenter">
-          <div class="focusCard">
-            <div class="focusEmoji" id="nowPlayingEmoji" aria-hidden="true">😴</div>
-            <p class="focusTitle" id="nowPlayingLabel">No fireplace playing</p>
-            <p class="focusSubtitle">Choose a theme, start a timer, and let the night stay quiet.</p>
-
-            <button id="soundToggle" type="button" aria-pressed="false" class="focusSoundButton">
-              Fireplace off
-            </button>
-          </div>
-        </div>
-
         <div class="focusBottom" aria-label="Focus timer controls">
           <div class="bottomTimer">
             <div class="timerDisplay" aria-live="polite" aria-atomic="true">
@@ -100,17 +82,31 @@
           </div>
         </div>
 
+        <div class="fireplaceControl">
+          <button id="soundToggle" type="button" aria-pressed="false" class="fireplaceButton">
+            <span id="nowPlayingEmoji" aria-hidden="true">🔥</span>
+            <span id="nowPlayingLabel">Fireplace</span>
+          </button>
+        </div>
+
         <audio id="fireAudio" loop>
-          <source src="fireplace.mp3" type="audio/mpeg" />
+          <source src="assets/fireplace.mp3" type="audio/mpeg" />
         </audio>
       </section>
 
       <footer class="foot">
-        <p>Built for deep winter focus. HTML + CSS + a little crackling sound.</p>
+        <div class="themeControl themeControl--footer">
+          <label for="themeSelect">Theme</label>
+          <select id="themeSelect">
+            <option value="night" selected>Solstice Night</option>
+            <option value="fireside">Fireside Study</option>
+            <option value="aurora">Aurora Focus</option>
+            <option value="starfield">Starfield Silence</option>
+            <option value="glacier">Glacier Dawn</option>
+          </select>
+        </div>
       </footer>
     </main>
     <script src="script.js"></script>
   </body>
 </html>
-
-

@@ -3,7 +3,6 @@ const body = document.body;
 
 const themeSelect = document.getElementById('themeSelect');
 
-// Fireplace sound
 const soundToggle = document.getElementById('soundToggle');
 const fireAudio = document.getElementById('fireAudio');
 
@@ -58,18 +57,16 @@ if (soundToggle && fireAudio) {
       if (!isPlaying) {
         await fireAudio.play();
         soundToggle.setAttribute('aria-pressed', 'true');
-        soundToggle.textContent = 'Fireplace on';
         if (nowPlayingEmojiEl && nowPlayingLabelEl) {
           nowPlayingEmojiEl.textContent = '🔥';
-          nowPlayingLabelEl.textContent = 'Fireplace ambience';
+          nowPlayingLabelEl.textContent = 'Fireplace';
         }
       } else {
         fireAudio.pause();
         soundToggle.setAttribute('aria-pressed', 'false');
-        soundToggle.textContent = 'Fireplace off';
         if (nowPlayingEmojiEl && nowPlayingLabelEl) {
-          nowPlayingEmojiEl.textContent = '😴';
-          nowPlayingLabelEl.textContent = 'No fireplace playing';
+          nowPlayingEmojiEl.textContent = '🔥';
+          nowPlayingLabelEl.textContent = 'Fireplace';
         }
       }
     } catch (err) {
@@ -131,6 +128,8 @@ function startTimer() {
   timerPauseBtn.disabled = false;
   timerResetBtn.disabled = false;
 
+  body.classList.add('focus-mode');
+
   const startTime = Date.now();
   const target = startTime + timerRemaining * 1000;
 
@@ -163,6 +162,8 @@ function pauseTimer() {
   timerStartBtn.disabled = false;
   timerPauseBtn.disabled = true;
   clearInterval(timerInterval);
+  
+  body.classList.remove('focus-mode');
 }
 
 function stopTimer(reset = true) {
@@ -170,6 +171,9 @@ function stopTimer(reset = true) {
   clearInterval(timerInterval);
   timerStartBtn.disabled = false;
   timerPauseBtn.disabled = true;
+  
+  body.classList.remove('focus-mode');
+  
   if (reset) {
     timerRemaining = timerDuration;
     updateTimerDisplay(timerRemaining);
